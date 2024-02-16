@@ -6,7 +6,6 @@ import { ContactList } from './ContactList/ContactList';
 
 import { search } from '../helpers/searchFunction';
 import { load, save } from '../helpers/storage';
-import data from '../data/contactList.json';
 import css from './App.module.css';
 
 const getInitialContacts = () => {
@@ -14,7 +13,7 @@ const getInitialContacts = () => {
   return savedContacts ? savedContacts : [];
 };
 
-export const App = () => {
+export default function App() {
   const [inputValue, setInputValue] = useState('');
   const [contactList, setContactList] = useState(getInitialContacts);
 
@@ -44,4 +43,4 @@ export const App = () => {
       <ContactList contactList={searchResult} onDelete={deleteContact} />
     </div>
   );
-};
+}
