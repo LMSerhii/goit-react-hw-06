@@ -1,20 +1,25 @@
 import { useSelector } from 'react-redux';
-import { Contact } from '../Contact/Contact';
+import Contact from '../Contact/Contact';
 import { getContacts } from '../../redux/itemsSlice';
+import { getQuery } from '../../redux/filtersSlice';
+import { search } from '../../helpers/searchFunction';
 import css from './ContactList.module.css';
 
-export const ContactList = ({ onDelete }) => {
+export default function ContactList() {
   const contacts = useSelector(getContacts);
+  const query = useSelector(getQuery);
+
+  const filtredContacts = search(contacts, query);
 
   return (
     <ul className={css.contactList}>
-      {contacts.map(({ id, name, number }) => {
+      {filtredContacts.map(({ id, name, number }) => {
         return (
           <li key={id}>
-            <Contact id={id} name={name} number={number} onDelete={onDelete} />
+            <Contact id={id} name={name} number={number} />
           </li>
         );
       })}
     </ul>
   );
-};
+}

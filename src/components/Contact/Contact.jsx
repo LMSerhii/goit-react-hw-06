@@ -1,12 +1,12 @@
-import { IconContext } from 'react-icons';
+import { useDispatch } from 'react-redux';
 import { FaUserAlt } from 'react-icons/fa';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
-import css from './Contact.module.css';
 import { deleteContacts } from '../../redux/itemsSlice';
-import { useDispatch } from 'react-redux';
+import Button from '../Button/Button';
+import css from './Contact.module.css';
 
-export const Contact = ({ id, name, number }) => {
+export default function Contact({ id, name, number }) {
   const dispatch = useDispatch();
 
   return (
@@ -19,13 +19,12 @@ export const Contact = ({ id, name, number }) => {
           <FaPhoneAlt className={css.icon} /> {number}
         </p>
       </div>
-      <button
+      <Button
         className={css.button}
-        type="button"
         onClick={() => dispatch(deleteContacts(id))}
       >
         <IoClose size={32} />
-      </button>
+      </Button>
     </div>
   );
-};
+}
