@@ -1,10 +1,11 @@
 import { useId } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 import css from './ContactForm.module.css';
 import Button from '../Button/Button';
-import { addContacts } from '../../redux/itemsSlice';
-import { useDispatch } from 'react-redux';
+import { addContacts, getContacts } from '../../redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ContactFormSchema = Yup.object().shape({
   name: Yup.string()
@@ -23,9 +24,23 @@ export default function ContactForm() {
   const dispatch = useDispatch();
   const nameFieldId = useId();
   const phoneFieldId = useId();
+  const contacts = useSelector(getContacts);
 
   const handleSaubmit = (values, action) => {
+    const existingContact = contacts.find(
+      contact =>
+        contact.name.toLowerCase() === values.name.toLowerCase() ||
+        contact.number === values.number
+    );
+
+    if (existingContact) {
+      toast.error('This contact already exists.');
+      return;
+    }
+
     dispatch(addContacts(values));
+
+    toast.success('Contact added successfully!');
     action.resetForm();
   };
 

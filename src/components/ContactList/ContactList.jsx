@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import Contact from '../Contact/Contact';
-import { getContacts } from '../../redux/itemsSlice';
+import { getContacts } from '../../redux/contactsSlice';
 import { getQuery } from '../../redux/filtersSlice';
 import { search } from '../../helpers/searchFunction';
 import css from './ContactList.module.css';

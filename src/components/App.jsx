@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import Title from './Titile/Title';
 import Layout from './Layout/Layout';
 import ContactForm from './ContactForm/ContactForm';
@@ -11,6 +12,7 @@ export default function App() {
       <ContactForm />
       <SearchBox />
       <ContactList />
+      <Toaster />
     </Layout>
   );
 }
